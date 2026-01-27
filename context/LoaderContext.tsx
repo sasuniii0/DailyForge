@@ -1,6 +1,6 @@
 // context/LoaderContext.tsx
 import React, { createContext, useState, ReactNode, useContext } from "react"
-import { View, ActivityIndicator } from "react-native"
+import { View, ActivityIndicator, Text, StyleSheet } from "react-native"
 
 interface LoaderContextProps {
   showLoader: () => void
@@ -25,12 +25,27 @@ export const LoaderProvider = ({ children }: { children: ReactNode }) => {
       {children}
 
       {isLoading && (
-        <View className="absolute top-0 left-0 right-0 bottom-0 justify-center items-center bg-black/30">
-          <View className="bg-white p-6 rounded-2xl shadow-lg">
-            <ActivityIndicator size="large" color="#1e40af" />
+        <View style={styles.overlay}>
+          <View className=" px-12 py-12 rounded-[40px] shadow-2xl items-center border-orange-50">
+            {/* Orange Loading spinner matching theme */}
+            <ActivityIndicator size="large" color="#FF6B35" />
           </View>
         </View>
       )}
     </LoaderContext.Provider>
   )
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 9999,
+  }
+})
