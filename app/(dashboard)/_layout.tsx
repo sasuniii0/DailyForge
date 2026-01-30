@@ -4,6 +4,7 @@ import { Tabs } from "expo-router"
 const tabs = [
     {name: "home", icon: "home" , title: "Home"},
     {name: "habits", icon: "check-circle" , title: "Habits"},
+    {name: "community" , icon: "group", title:"Community"},
     {name: "progress", icon: "trending-up" , title: "Progress"},
     {name: "settings", icon: "settings" , title: "Settings"},
 ] as const;
