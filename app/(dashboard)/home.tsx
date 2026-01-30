@@ -196,8 +196,8 @@ const Home = () => {
 
                 {/* Progress Ring Section */}
                 <View className="px-6 py-6">
-                    <View className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-3xl p-6 shadow-lg">
-                        <View className="flex-row items-center justify-between">
+                    <View className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-3xl p-2 shadow-lg">
+                        <View className="self-center flex-row items-center justify-between bg-orange-500 p-6 rounded-lg">
                             <View className="flex-1">
                                 <Text className="text-white text-lg font-bold mb-2">
                                     Daily Progress
@@ -242,7 +242,7 @@ const Home = () => {
                     </View>
                 </View>
 
-                {/* Today's Habits */}
+                {/* Today's Habits
                 <View className="px-6 pb-6">
                     <View className="flex-row justify-between items-center mb-4">
                         <Text className="text-xl font-bold text-gray-900">Today's Habits</Text>
@@ -321,9 +321,9 @@ const Home = () => {
                             ))}
                         </>
                     )}
-                </View>
+                </View> */}
 
-                {/* Quick Actions */}
+                {/* Quick Actions
                 {habits.length > 0 && (
                     <View className="px-6 pb-8">
                         <Text className="text-xl font-bold text-gray-900 mb-4">Quick Actions</Text>
@@ -349,10 +349,10 @@ const Home = () => {
                             </Pressable>
                         </View>
                     </View>
-                )}
+                )} */}
             </ScrollView>
 
-            {/* Floating Action Button */}
+            {/* Floating Action Button
             <Pressable 
                 onPress={() => router.push("/add-habit")}
                 className="absolute bottom-8 right-6 bg-orange-500 rounded-full p-5 shadow-2xl active:bg-orange-600"
@@ -361,7 +361,7 @@ const Home = () => {
                 <Svg width="28" height="28" viewBox="0 0 24 24">
                     <Path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#fff"/>
                 </Svg>
-            </Pressable>
+            </Pressable> */}
         </SafeAreaView>
     )
 }

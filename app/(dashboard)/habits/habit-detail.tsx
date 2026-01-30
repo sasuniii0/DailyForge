@@ -3,7 +3,7 @@ import { useRouter, useLocalSearchParams } from "expo-router"
 import React, { useState, useEffect } from "react"
 import Svg, { Path, Circle, Line, Polyline } from 'react-native-svg'
 import { doc, getDoc, updateDoc, increment, collection, query, where, getDocs, orderBy, limit, addDoc, setDoc } from "firebase/firestore"
-import { db, auth } from "../../service/firebase.config"
+import { db, auth } from "../../../service/firebase.config"
 import Toast from "react-native-toast-message"
 
 interface Habit {

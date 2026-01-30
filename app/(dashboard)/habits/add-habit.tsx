@@ -3,7 +3,7 @@ import { useRouter } from "expo-router"
 import React, { useState, useEffect } from "react"
 import Svg, { Path, Circle } from 'react-native-svg'
 import { collection, query, where, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore"
-import { db, auth } from "../../service/firebase.config"
+import { db, auth } from "../../../service/firebase.config"
 import Toast from "react-native-toast-message"
 
 interface Habit {
@@ -500,7 +500,7 @@ const Habits = () => {
                 </View>
             </Modal>
 
-            {/* Floating Action Button */}
+            {/* Floating Action Button
             <Pressable 
                 onPress={() => router.push("/add-habit")}
                 className="absolute bottom-8 right-6 bg-orange-500 rounded-full p-5 shadow-2xl active:bg-orange-600"
@@ -509,7 +509,7 @@ const Habits = () => {
                 <Svg width="28" height="28" viewBox="0 0 24 24">
                     <Path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#fff"/>
                 </Svg>
-            </Pressable>
+            </Pressable> */}
         </SafeAreaView>
     )
 }

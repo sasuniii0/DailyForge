@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import Svg, { Path, Circle } from 'react-native-svg'
 import { collection, query, where, getDocs, doc, deleteDoc, updateDoc, increment } from "firebase/firestore"
 // Updated to match your detail screen path
-import { db, auth } from "../../service/firebase.config" 
+import { db, auth } from "../../../service/firebase.config" 
 import Toast from "react-native-toast-message"
 
 interface Habit {
@@ -246,14 +246,14 @@ const Habits = () => {
             </ScrollView>
 
             {/* Floating Action Button */}
-            <Pressable 
+            {/* <Pressable 
                 onPress={() => router.push("/add-habit")}
                 className="absolute bottom-8 right-6 bg-orange-600 rounded-full p-5 shadow-2xl"
             >
                 <Svg width="28" height="28" viewBox="0 0 24 24">
                     <Path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="#fff"/>
                 </Svg>
-            </Pressable>
+            </Pressable> */}
 
             {/* Reusing your existing Modal structures for Filters and Deletion... */}
         </SafeAreaView>
