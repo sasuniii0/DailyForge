@@ -12,6 +12,9 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "POST_NOTIFICATIONS"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -27,6 +30,13 @@
       "bundler": "metro"
     },
     "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#F97316"
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -39,7 +49,8 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,

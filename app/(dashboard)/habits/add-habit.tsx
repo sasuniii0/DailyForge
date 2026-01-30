@@ -7,6 +7,7 @@ import Toast from "react-native-toast-message";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Habit } from "../../../types/habits"; // Import your interface
 import { HabitService } from "../../../service/habitService";
+import { NotificationService } from "../../../service/notificationService"; // Import the updated service
 
 const AddHabit = () => {
     const router = useRouter();
@@ -20,50 +21,50 @@ const AddHabit = () => {
     const [isForging, setIsForging] = useState(false);
 
     const handleCreate = async () => {
-    if (!name.trim()) {
-        Toast.show({ 
-        type: 'error', 
-        text1: 'Empty Anvil!', 
-        text2: 'Please name your habit before forging.' 
-        });
-        return;
-    }
+  if (!name.trim()) {
+    Toast.show({ 
+      type: 'error', 
+      text1: 'Empty Anvil!', 
+      text2: 'Please name your habit before forging.' 
+    });
+    return;
+  }
 
-    setIsForging(true);
-    try {
-        const user = auth.currentUser;
-        if (user) {
-        // We pass the raw UI data to the service
-        // The service will handle default streaks, dates, and ID generation
-        await HabitService.createHabit(user.uid, {
-            name: name.trim(),
-            description: description.trim(),
-            frequency: frequency,
-            category: category,
-            targetGoal: parseInt(targetGoal) || 1,
-            color: "#F97316", // Default Forge Orange
-            // reminderTime is optional per your Habit type
-        });
+  setIsForging(true);
 
-        Toast.show({ 
-            type: 'success', 
-            text1: 'Habit Forged!', 
-            text2: 'Your new tool is ready at the anvil.' 
-        });
-        
-        router.back();
-        }
-    } catch (error) {
-        console.error("Forge Error:", error);
-        Toast.show({ 
-        type: 'error', 
-        text1: 'Forge Error', 
-        text2: 'The iron cooled too fast. Try again.' 
-        });
-    } finally {
-        setIsForging(false);
-    }
-    };
+  try {
+    const user = auth.currentUser;
+    if (user) {
+      // 1. Create the habit and get the ID string
+      const newHabitId = await HabitService.createHabit(user.uid, {
+        name: name.trim(),
+        description: description.trim(),
+        frequency: frequency,
+        category: category,
+        targetGoal: parseInt(targetGoal) || 1,
+        color: "#F97316",
+      });
+
+
+      Toast.show({ 
+        type: 'success', 
+        text1: 'Habit Forged!', 
+        text2: 'Your new tool is ready at the anvil.' 
+      });
+      
+      router.back();
+    } // End if(user)
+  } catch (error) {
+    console.error("Forge Error:", error);
+    Toast.show({ 
+      type: 'error', 
+      text1: 'Forge Error', 
+      text2: 'The iron cooled too fast. Try again.' 
+    });
+  } finally {
+    setIsForging(false);
+  }
+};
 
   return (
     <SafeAreaView className="flex-1 bg-white">
