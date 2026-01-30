@@ -5,7 +5,7 @@ const HabitLayout = () => {
         <Stack screenOptions={{headerShown:false}}>
             <Stack.Screen name="index" />
             <Stack.Screen name="habit-detail" />
-            <Stack.Screen name="add-habit" />
+            <Stack.Screen name="add-habit" options={{ presentation: 'modal' }}/>
             <Stack.Screen name="edit-habit" />
         </Stack>
     )
