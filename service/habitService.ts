@@ -1,19 +1,32 @@
 import { db } from "../service/firebase.config"; 
-import { collection, addDoc, updateDoc, doc, query, where, getDocs, increment,serverTimestamp,Timestamp } from "firebase/firestore";
+import { 
+  collection, 
+  addDoc, 
+  updateDoc, 
+  doc, 
+  query, 
+  where, 
+  getDocs, 
+  serverTimestamp, 
+  Timestamp, 
+  deleteDoc 
+} from "firebase/firestore";
 import { Habit } from "../types/habits";
 
 const HABITS_COLLECTION = "habits";
 
 export const HabitService = {
-  // 1. Create a new habit (The Blueprint)
-  async createHabit(userId: string, title: string) {
+  // 1. Create a new habit (Updated to match your UI)
+  async createHabit(userId: string, habitData: Omit<Habit, 'id' | 'createdAt' | 'currentStreak' | 'bestStreak' | 'completedToday' | 'totalCompletions'>) {
     return await addDoc(collection(db, HABITS_COLLECTION), {
+      ...habitData,
       userId,
-      title,
       currentStreak: 0,
       bestStreak: 0,
+      completedToday: false,
+      totalCompletions: 0,
+      createdAt: new Date().toISOString(), // Matching your interface's string type
       lastCompletedDate: null,
-      createdAt: serverTimestamp(),
     });
   },
 
@@ -21,49 +34,57 @@ export const HabitService = {
   async getUserHabits(userId: string): Promise<Habit[]> {
     const q = query(collection(db, HABITS_COLLECTION), where("userId", "==", userId));
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Habit));
+    return querySnapshot.docs.map(doc => ({ 
+        id: doc.id, 
+        ...doc.data() 
+    } as Habit));
   },
 
-  // 3. The "Strike" Logic (Mark complete and update streak)
-  async completeHabit(habitId: string, currentStreak: number, bestStreak: number, lastDate: Timestamp | null) {
+  // 3. The "Strike" Logic (Improved streak validation)
+  async completeHabit(habitId: string, habit: Habit) {
     const habitRef = doc(db, HABITS_COLLECTION, habitId);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    let newStreak = currentStreak + 1;
+    let newStreak = (habit.currentStreak || 0) + 1;
+    const lastDateStr = habit.lastCompletedDate;
     
-    // Check if the streak was broken (last completed was before yesterday)
-    if (lastDate) {
-      const lastDateObj = lastDate.toDate();
+    if (lastDateStr) {
+      const lastDateObj = new Date(lastDateStr);
       lastDateObj.setHours(0, 0, 0, 0);
       
-      const diffInDays = (today.getTime() - lastDateObj.getTime()) / (1000 * 60 * 60 * 24);
+      const diffInDays = Math.floor((today.getTime() - lastDateObj.getTime()) / (1000 * 60 * 60 * 24));
       
+      if (diffInDays === 0) return; // Already struck the iron today
       if (diffInDays > 1) {
-        newStreak = 1; // Cooled down! Reset to 1
-      } else if (diffInDays === 0) {
-        return; // Already forged today, do nothing
+        newStreak = 1; // Forge cooled down, reset streak
       }
     }
 
-    const isNewBest = newStreak > bestStreak;
+    const isNewBest = newStreak > (habit.bestStreak || 0);
 
     await updateDoc(habitRef, {
       currentStreak: newStreak,
-      bestStreak: isNewBest ? newStreak : bestStreak,
-      lastCompletedDate: serverTimestamp(),
+      bestStreak: isNewBest ? newStreak : habit.bestStreak,
+      completedToday: true,
+      totalCompletions: (habit.totalCompletions || 0) + 1,
+      lastCompletedDate: new Date().toISOString(),
     });
 
-    // Add a log entry for history
+    // Sub-collection for detailed history
     await addDoc(collection(db, `${HABITS_COLLECTION}/${habitId}/logs`), {
       date: serverTimestamp(),
       status: "completed"
     });
   },
 
-  // 4. Delete a habit
+  // 4. Delete a habit (Actual deletion or soft delete)
   async deleteHabit(habitId: string) {
     const habitRef = doc(db, HABITS_COLLECTION, habitId);
-    await updateDoc(habitRef, { deleted: true });
+    // Option A: Hard Delete (Cleans the database)
+    await deleteDoc(habitRef);
+    
+    // Option B: Soft Delete (Use this if you want to keep data for AI insights)
+    // await updateDoc(habitRef, { deleted: true });
   }
 };
