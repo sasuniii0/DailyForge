@@ -36,6 +36,12 @@
     },
     "plugins": [
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow DailyForge to access your photos to share your habit progress."
+        }
+      ],
+      [
         "expo-camera",
         {
           "cameraPermission": "Allow DailyForge to access your camera to show proof of your habits."
