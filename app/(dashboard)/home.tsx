@@ -163,7 +163,7 @@ const Home = () => {
                         habits.map((habit) => (
                             <Pressable
                                 key={habit.id}
-                                onPress={() => router.push({ pathname: '/habit-detail/[id]', params: { id: habit.id } } as any)}
+                                onPress={() => router.push({ pathname: 'habits/[id]', params: { id: habit.id } } as any)}
                                 className={`flex-row items-center p-4 rounded-[24px] mb-3 border ${habit.completedToday ? 'bg-green-50 border-green-100' : 'bg-white border-gray-100 shadow-sm'}`}
                             >
                                 <View className={`p-3 rounded-2xl mr-4 ${habit.completedToday ? 'bg-green-500' : 'bg-gray-100'}`}>

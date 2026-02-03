@@ -78,7 +78,7 @@ const Settings = () => {
             </Text>
           </View>
           <View className="flex-1">
-            <Text className="text-white font-bold text-xl" numberOfLines={1}>Master Smith</Text>
+            <Text className="text-white font-bold text-xl" numberOfLines={1}>{user?.displayName}</Text>
             <Text className="text-orange-200 text-xs font-medium">{user?.email}</Text>
           </View>
         </View>
