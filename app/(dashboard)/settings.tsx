@@ -5,6 +5,8 @@ import { signOut } from "firebase/auth";
 import { useRouter } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Toast from "react-native-toast-message";
+import { cancelAllReminders, registerForPushNotificationsAsync, scheduleDailyReminder } from "@/service/notificationService";
+import { useColorScheme } from "nativewind";
 
 const Settings = () => {
   const router = useRouter();
@@ -13,6 +15,36 @@ const Settings = () => {
   // Local state for toggles (You can later sync these with Firebase/AsyncStorage)
   const [notifications, setNotifications] = React.useState(true);
   const [darkMode, setDarkMode] = React.useState(false);
+  const { colorScheme, toggleColorScheme, setColorScheme } = useColorScheme();
+
+  const isDarkMode = colorScheme === "dark";
+
+  const handleDarkModeToggle = () => {
+    const newScheme = isDarkMode ? "light" : "dark";
+    setColorScheme(newScheme);
+    // Optional: Save this to AsyncStorage so it persists on restart
+  };
+
+  const toggleNotifications = async () => {
+  const newValue = !notifications;
+  
+  try {
+    if (newValue) {
+      const hasPermission = await registerForPushNotificationsAsync();
+      if (hasPermission) {
+        await scheduleDailyReminder(9, 0); // 9:00 AM
+        setNotifications(true);
+        // Tip: Add Toast.show here to confirm it's set!
+      }
+    } else {
+      // Fixed the typo from 'Notifi' to use our service function
+      await cancelAllReminders(); 
+      setNotifications(false);
+    }
+  } catch (error) {
+    console.error("Forge Notification Error:", error);
+  }
+};
 
   const handleLogout = () => {
     Alert.alert(
@@ -92,7 +124,7 @@ const Settings = () => {
           subtitle="Get notified to strike while the iron is hot"
           type="switch"
           value={notifications}
-          onPress={() => setNotifications(!notifications)}
+          onPress={toggleNotifications}
         />
 
         <SettingItem 
@@ -100,8 +132,8 @@ const Settings = () => {
           title="Dark Forge" 
           subtitle="Reduce glare for night smithing"
           type="switch"
-          value={darkMode}
-          onPress={() => setDarkMode(!darkMode)}
+          value={isDarkMode}
+          onPress={handleDarkModeToggle}
         />
 
         {/* Account Section */}
