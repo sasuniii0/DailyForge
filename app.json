@@ -4,7 +4,7 @@
     "slug": "DailyForge",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/dailyforge.jpg",
     "scheme": "dailyforge",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -12,8 +12,13 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.dailyforge.app",
+      "googleServicesFile": "./google-services.json",
       "permissions": [
-        "POST_NOTIFICATIONS"
+        "POST_NOTIFICATIONS",
+        "android.permission.INTERNET",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -26,7 +31,7 @@
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png",
+      "favicon": "./assets/images/dailyforge.jpg",
       "bundler": "metro"
     },
     "plugins": [
@@ -57,11 +62,17 @@
         }
       ],
       "@react-native-community/datetimepicker",
-      "@react-native-google-signin/google-signin"
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "bd9adc22-4231-4de0-a690-d0041014b803"
+      }
     }
   }
 }

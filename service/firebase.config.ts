@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app";
 
 // @ts-ignore
-import { initializeAuth , getReactNativePersistence} from "firebase/auth";
+import { initializeAuth , getReactNativePersistence, GoogleAuthProvider} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -11,12 +11,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCN3Axk4rnSQtt0FhbO8JM74jfQMK5jZyU",
-  authDomain: "dailyforge-bd123.firebaseapp.com",
-  projectId: "dailyforge-bd123",
-  storageBucket: "dailyforge-bd123.firebasestorage.app",
-  messagingSenderId: "723948857230",
-  appId: "1:723948857230:web:e271a392e41a58f58366df"
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
