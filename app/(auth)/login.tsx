@@ -16,75 +16,14 @@ import { useLoader } from "../../hooks/use-loader";
 import Toast from "react-native-toast-message";
 import { loginUser } from "@/service/authService";
 import Svg, { Path } from 'react-native-svg';
-import { useGoogleSignIn, signInWithGoogle } from "@/service/googleAuthService";
 
 export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { hideLoader, showLoader, isLoading } = useLoader();
-    const { response, promptAsync } = useGoogleSignIn();
 
-    // Handle Google Sign-In response
-    useEffect(() => {
-        if (response?.type === 'success') {
-            handleGoogleResponse(response);
-        }
-    }, [response]);
-
-    const handleGoogleResponse = async (response: any) => {
-        try {
-            showLoader();
-            const { authentication } = response;
-            
-            if (!authentication?.idToken) {
-                throw new Error('No ID token received');
-            }
-
-            // Sign in to Firebase with Google credentials
-            const user = await signInWithGoogle(authentication.idToken);
-            
-            console.log('✅ Google sign-in successful:', user.email);
-            
-            Toast.show({
-                type: 'success',
-                text1: 'Success',
-                text2: `Welcome ${user.displayName || 'User'}!`
-            });
-            
-            // Navigate to home screen
-            router.replace("/home");
-            
-        } catch (error: any) {
-            console.error('❌ Google sign-in error:', error);
-            Toast.show({
-                type: 'error',
-                text1: 'Authentication error',
-                text2: error?.message || 'Something went wrong. Try again.'
-            });
-        } finally {
-            hideLoader();
-        }
-    };
-
-    const handleGooglePress = async () => {
-        if (isLoading) return;
-        
-        try {
-            showLoader();
-            // This will open the Google Sign-In popup
-            await promptAsync();
-        } catch (error: any) {
-            console.error('Google login error:', error);
-            Toast.show({
-                type: 'error',
-                text1: 'Error',
-                text2: 'Failed to open Google Sign-In'
-            });
-            hideLoader();
-        }
-    };
-
+    
     const handleSignin = async () => {
         if (!email || !password || isLoading) {
             Toast.show({
@@ -185,7 +124,7 @@ export default function Login() {
                             {/* Social Buttons */}
                             <View className="gap-3 mb-4">
                                 <Pressable 
-                                    onPress={handleGooglePress}
+                                    
                                     disabled={isLoading}
                                     className="border-2 border-gray-300 rounded-full py-4 items-center flex-row justify-center active:bg-gray-50"
                                 >
