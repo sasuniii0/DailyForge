@@ -93,6 +93,23 @@ const HabitDetail = () => {
 
             if (habitSnap.exists()) {
                 const habitData = { id: habitSnap.id, ...habitSnap.data() } as Habit
+                
+                // ✅ CRITICAL: Reset completedToday if it's a new day
+                const today = new Date().toISOString().split('T')[0]
+                
+                if (habitData.lastCompletedDate) {
+                    const lastCompletedDay = habitData.lastCompletedDate.split('T')[0]
+                    
+                    // If last completed was NOT today but still marked as completed
+                    if (lastCompletedDay !== today && habitData.completedToday === true) {
+                        console.log("🔄 Resetting completedToday - new day detected")
+                        await updateDoc(habitRef, {
+                            completedToday: false
+                        })
+                        habitData.completedToday = false
+                    }
+                }
+                
                 setHabit(habitData)
 
                 // Try to fetch completion history
@@ -171,15 +188,55 @@ const HabitDetail = () => {
             const newCompletedStatus = !habit.completedToday
             const todayDate = new Date().toISOString().split('T')[0]
             
+            // ✅ Check if already completed today
+            if (habit.lastCompletedDate) {
+                const lastCompletedDay = habit.lastCompletedDate.split('T')[0]
+                
+                if (lastCompletedDay === todayDate && newCompletedStatus === true) {
+                    Toast.show({
+                        type: 'info',
+                        text1: 'Already Completed',
+                        text2: 'You already completed this habit today!'
+                    })
+                    return
+                }
+            }
+            
+            // Calculate streak logic
+            let newStreak = habit.currentStreak
+            
+            if (newCompletedStatus) {
+                // Completing the habit
+                if (habit.lastCompletedDate) {
+                    const lastDate = new Date(habit.lastCompletedDate.split('T')[0])
+                    const today = new Date(todayDate)
+                    const diffDays = Math.floor((today.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24))
+                    
+                    if (diffDays === 1) {
+                        // Consecutive day
+                        newStreak = habit.currentStreak + 1
+                    } else if (diffDays > 1) {
+                        // Streak broken, restart
+                        newStreak = 1
+                    }
+                } else {
+                    // First completion ever
+                    newStreak = 1
+                }
+            } else {
+                // Uncompleting the habit
+                newStreak = Math.max(0, habit.currentStreak - 1)
+            }
+            
             // Update habit document
             await updateDoc(habitRef, {
                 completedToday: newCompletedStatus,
-                currentStreak: newCompletedStatus ? habit.currentStreak + 1 : Math.max(0, habit.currentStreak - 1),
-                bestStreak: newCompletedStatus && habit.currentStreak + 1 > habit.bestStreak 
-                    ? habit.currentStreak + 1 
+                currentStreak: newStreak,
+                bestStreak: newCompletedStatus && newStreak > habit.bestStreak 
+                    ? newStreak 
                     : habit.bestStreak,
                 totalCompletions: newCompletedStatus ? increment(1) : increment(-1),
-                lastCompletedDate: newCompletedStatus ? new Date().toISOString() : null
+                lastCompletedDate: newCompletedStatus ? new Date().toISOString() : habit.lastCompletedDate
             })
 
             // Try to create/update completion record

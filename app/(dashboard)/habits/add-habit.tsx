@@ -7,7 +7,6 @@ import Toast from "react-native-toast-message";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Habit } from "../../../types/habits"; // Import your interface
 import { HabitService } from "../../../service/habitService";
-import { NotificationService } from "../../../service/notificationService"; // Import the updated service
 
 const AddHabit = () => {
     const router = useRouter();
