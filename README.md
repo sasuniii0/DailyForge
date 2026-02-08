@@ -9,7 +9,7 @@ The application includes secure authentication, full CRUD functionality, state m
 ---
 ## Screenshots Preview
 
-## 🖼️ Gallery of Masterpieces
+## Gallery of Masterpieces
 
 | | | |
 | :---: | :---: | :---: |
