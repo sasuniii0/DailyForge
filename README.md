@@ -7,14 +7,17 @@ DailyForge is a rugged, blacksmith-inspired habit-tracking application built to 
 The application includes secure authentication, full CRUD functionality, state management, navigation, and cloud-based data persistence using Firebase. This project is developed as the **final coursework for ITS 2127 – Advanced Mobile Developer (AMD)**.
 
 ---
+## Screenshots Preview
 
-## Academic Details
-- **Module:** ITS 2127 – Advanced Mobile Developer  
-- **Course:** Graduate Diploma in Software Engineering  
-- **Student:** Sasuni Wijerathne  
-- **Project Type:** Final Examination Assignment  
-- **Framework:** React Native (Expo)  
-- **Backend:** Firebase  
+1. [Signin](./assets/images/signin.jpeg)
+2. [Home](./assets/images/home.jpeg)
+3. [New-Habit](./assets/images/new-habit.jpeg)
+4. [Uddate-Delete-Habit](./assets/images/edit-delete-habit.jpeg)
+5. [Habit-Details](./assets/images/habit-detail.jpeg)
+6. [Community](./assets/images/community.jpeg)
+7. [Progress](./assets/images/progress.jpeg)
+8. [Settings](./assets/images/settings.jpeg)
+9. [Edit-User](./assets/images/edit-user.jpeg)
 
 ---
 
@@ -95,6 +98,15 @@ npx expo start
 ```
 
 ---
+
+## Academic Details
+- **Module:** ITS 2127 – Advanced Mobile Developer  
+- **Course:** Graduate Diploma in Software Engineering  
+- **Student:** Sasuni Wijerathne  
+- **Project Type:** Final Examination Assignment  
+- **Framework:** React Native (Expo)  
+- **Backend:** Firebase  
+
 
 ## Author
 - **Sasuni Wijerathne**
