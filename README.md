@@ -9,16 +9,16 @@ The application includes secure authentication, full CRUD functionality, state m
 ---
 ## Screenshots Preview
 
-1. [Signin](./assets/images/signin.jpeg)
-2. [Home](./assets/images/home.jpeg)
-3. [New-Habit](./assets/images/new-habit.jpeg)
-4. [Uddate-Delete-Habit](./assets/images/edit-delete-habit.jpeg)
-5. [Habit-Details](./assets/images/habit-detail.jpeg)
-6. [Community](./assets/images/community.jpeg)
-7. [Progress](./assets/images/progress.jpeg)
-8. [Settings](./assets/images/settings.jpeg)
-9. [Edit-User](./assets/images/edit-user.jpeg)
+## 🖼️ Gallery of Masterpieces
 
+| | | |
+| :---: | :---: | :---: |
+| ![Signin](./assets/images/signin.jpeg) | ![Home](./assets/images/home.jpeg) | ![New-Habit](./assets/images/new-habit.jpeg) |
+| **Sign In** | **Home** | **New-Habit** |
+| ![Update](./assets/images/edit-delete-habit.jpeg) | ![Details](./assets/images/habit-detail.jpeg) | ![Community](./assets/images/community.jpeg) |
+| **Refining Habit** | **Habit Details** | **The Community** |
+| ![Progress](./assets/images/progress.jpeg) | ![Settings](./assets/images/settings.jpeg) | ![Edit-User](./assets/images/edit-user.jpeg) |
+| **Progress** | **Forge Settings** | **Edit-User Profile** |
 ---
 
 ## Features
