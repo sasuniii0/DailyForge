@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, updateProfile ,signInWithEmailAndPassword, signOut, updateEmail, updatePassword} from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile ,signInWithEmailAndPassword, signOut, updateEmail, updatePassword, sendPasswordResetEmail} from "firebase/auth"
 import { auth, db  } from "../service/firebase.config"
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -91,4 +91,16 @@ export const getUserData = async (userId: string) => {
         return userDoc.data();
     }
     return null;
+}
+
+export const resetPassword = async (email: string) => {
+    try {
+        // Use the 'auth' instance imported from your config
+        await sendPasswordResetEmail(auth, email);
+        return true;
+    } catch (error: any) {
+        // Firebase error codes (e.g., 'auth/user-not-found') 
+        // will be caught by your Login screen's try-catch
+        throw error;
+    }
 }

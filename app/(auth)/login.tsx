@@ -14,7 +14,7 @@ import {
 import { useRouter } from "expo-router";
 import { useLoader } from "../../hooks/use-loader";
 import Toast from "react-native-toast-message";
-import { loginUser } from "@/service/authService";
+import { loginUser, resetPassword } from "@/service/authService";
 import Svg, { Path } from 'react-native-svg';
 
 export default function Login() {
@@ -48,6 +48,35 @@ export default function Login() {
                 type: 'error',
                 text1: 'Login Failed',
                 text2: error?.message || "Something went wrong"
+            });
+        } finally {
+            hideLoader();
+        }
+    };
+
+    const handleForgotPassword = async () => {
+        if (!email) {
+            Toast.show({
+                type: 'error',
+                text1: 'Email Required',
+                text2: 'Please enter your email address first.'
+            });
+            return;
+        }
+
+        try {
+            showLoader();
+            await resetPassword(email);
+            Toast.show({
+                type: 'success',
+                text1: 'Email Sent',
+                text2: 'Check your inbox for password reset instructions.'
+            });
+        } catch (error: any) {
+            Toast.show({
+                type: 'error',
+                text1: 'Reset Failed',
+                text2: error?.message || "Check if the email is correct."
             });
         } finally {
             hideLoader();
@@ -100,8 +129,13 @@ export default function Login() {
                                 />
                             </View>
 
-                            <Pressable className="mb-8">
-                                <Text className="text-orange-600 font-semibold text-sm text-right">Forgot Password?</Text>
+                            <Pressable 
+                                className="mb-8 active:opacity-60" 
+                                onPress={handleForgotPassword}
+                            >
+                                <Text className="text-orange-600 font-semibold text-sm text-right">
+                                    Forgot Password?
+                                </Text>
                             </Pressable>
 
                             <Pressable
