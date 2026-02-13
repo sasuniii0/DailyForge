@@ -24,7 +24,7 @@ The application includes secure authentication, full CRUD functionality, state m
 
 ### **[Download DailyForge v1.0.0](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.1)**
 
-**Latest Version:** v1.0.0 | **Size:** ~45 MB | **Min Android:** 5.0+
+**Latest Version:** v1.0.1 | **Size:** ~45 MB | **Min Android:** 5.0+
 
 </div>
 
