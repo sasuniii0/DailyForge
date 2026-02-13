@@ -4,7 +4,7 @@
     "slug": "DailyForge",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/df.png",
     "scheme": "dailyforge",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -21,16 +21,16 @@
       ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/df.png",
+        "backgroundImage": "./assets/images/df.png",
+        "monochromeImage": "./assets/images/df.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/logo.png",
+      "favicon": "./assets/images/df.png",
       "bundler": "metro"
     },
     "plugins": [

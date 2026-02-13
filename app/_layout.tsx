@@ -1,42 +1,50 @@
-import { LoaderContext, LoaderProvider } from "../context/LoaderContext"
-import { Slot } from "expo-router"
-import { View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import Toast , { BaseToast, ErrorToast } from "react-native-toast-message"
+import { Slot } from "expo-router";
+import { View } from "react-native";
+import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+import { LoaderProvider } from "../context/LoaderContext";
 
 const toastConfig = {
   success: (props: any) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: "#4CAF50" }}
+      style={{ borderLeftColor: "#4CAF50", backgroundColor: '#1A1A1A' }} // Blacksmith dark theme hint
       contentContainerStyle={{ paddingHorizontal: 15 }}
-      text1Style={{ fontSize: 18, fontWeight: "bold" }} // increase font size
-      text2Style={{ fontSize: 16 }} // optional: increase subtext font size
+      text1Style={{ fontSize: 18, fontWeight: "bold", color: '#FFFFFF' }}
+      text2Style={{ fontSize: 16, color: '#CCCCCC' }}
     />
   ),
   error: (props: any) => (
     <ErrorToast
       {...props}
-      style={{ borderLeftColor: "#F44336" }}
+      style={{ borderLeftColor: "#F44336", backgroundColor: '#1A1A1A' }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
-      text1Style={{ fontSize: 18, fontWeight: "bold" }}
-      text2Style={{ fontSize: 16 }}
+      text1Style={{ fontSize: 18, fontWeight: "bold", color: '#FFFFFF' }}
+      text2Style={{ fontSize: 16, color: '#CCCCCC' }}
     />
   ),
 };
 
-// similar to app.tsxx in a standard React Native app
+// Internal component to safely use hooks like useSafeAreaInsets
+const AppContent = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{ flex: 1, paddingTop: insets.top , paddingBottom: insets.bottom, paddingLeft: insets.left, paddingRight: insets.right }}>
+      <Slot />
+      <Toast config={toastConfig} />
+    </View>
+  );
+};
+
 const RootLayout = () => {
-    const insets = useSafeAreaInsets()
+  return (
+    <SafeAreaProvider>
+      <LoaderProvider>
+        <AppContent />
+      </LoaderProvider>
+    </SafeAreaProvider>
+  );
+};
 
-    return(
-        <LoaderProvider>
-            <View style= {{flex:1}}>
-                <Slot/>
-                <Toast config={toastConfig}/>
-            </View>
-        </LoaderProvider>
-    )
-}
-
-export default RootLayout
+export default RootLayout;
