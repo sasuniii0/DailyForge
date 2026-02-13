@@ -1,7 +1,7 @@
 # DailyForge 
 **Forge Your Future, One Strike at a Time.**
 
-[![Download APK](https://img.shields.io/badge/Download-APK-orange?style=for-the-badge&logo=android)](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.0)
+[![Download APK](https://img.shields.io/badge/Download-APK-orange?style=for-the-badge&logo=android)](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.1)
 [![React Native](https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
@@ -22,7 +22,7 @@ The application includes secure authentication, full CRUD functionality, state m
 
 <div align="center">
 
-### **[Download DailyForge v1.0.0](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.0)**
+### **[Download DailyForge v1.0.0](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.1)**
 
 **Latest Version:** v1.0.0 | **Size:** ~45 MB | **Min Android:** 5.0+
 
@@ -30,13 +30,13 @@ The application includes secure authentication, full CRUD functionality, state m
 
 #### Quick Install via QR Code
 <div align="center">
-<img src="./assets/images/qr.png" width="200" alt="Download QR Code">
+<img src="./assets/images/frame.png" width="200" alt="Download QR Code">
 
 *Scan with your Android device to download instantly*
 </div>
 
 #### 🔧 Installation Steps
-1. **Download** the [latest APK release](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.0)
+1. **Download** the [latest APK release](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.1)
 2. **Enable installation from unknown sources:**
    - Go to **Settings → Security** (or Settings → Apps)
    - Enable **"Install from Unknown Sources"** or **"Install Unknown Apps"**
@@ -342,7 +342,7 @@ This project is created for academic purposes as part of the ITS 2127 course req
 
 **by Sasuni Wijerathne**
 
-[Download APK](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.0) • [Report Bug](https://github.com/sasuniii0/DailyForge/issues) • [Request Feature](https://github.com/sasuniii0/DailyForge/issues)
+[Download APK](https://github.com/sasuniii0/DailyForge/releases/tag/v1.0.1) • [Report Bug](https://github.com/sasuniii0/DailyForge/issues) • [Request Feature](https://github.com/sasuniii0/DailyForge/issues)
 
 ---
 
